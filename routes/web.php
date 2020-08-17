@@ -13,11 +13,32 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+//app()->bind('example', function () {
+//    return new \App\Example();
+//});
 
-    return view('welcome');
+Route::get('/', 'PagesController@home');
 
-});
+Route::get('/contact', 'ContactController@show');
+
+Route::post('/contact', 'ContactController@store');
+
+Route::get('/payments/create', 'PaymentsController@Create')->middleware('auth');
+
+Route::post('payments', 'PaymentsController@store')->middleware('auth');
+
+Route::get('notifications', 'UserNotificationsController@show')->middleware('auth');
+
+//Route::get('/', function () {
+//
+//    $example = resolve(App\Example::class);
+//
+//    ddd($example);
+//
+//
+//    // return view('welcome');
+//
+//});
 
 Auth::routes();
 
